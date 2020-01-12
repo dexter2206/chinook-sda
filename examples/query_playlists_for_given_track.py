@@ -4,9 +4,8 @@ from db import Session, get_engine, session_scope
 
 if __name__ == "__main__":
     engine = get_engine(echo=True)
-    Session.configure(bind=engine)
 
-    with session_scope() as session:
+    with session_scope(engine) as session:
         track = session.query(Track).first()
 
         for playlist in session.query(Playlist).filter(Playlist.tracks.contains(track)):

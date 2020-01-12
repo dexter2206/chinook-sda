@@ -7,8 +7,8 @@ Session = sessionmaker()
 
 
 @contextmanager
-def session_scope():
-    session = Session()
+def session_scope(engine):
+    session = Session(bind=engine)
     try:
         yield session
     except Exception:

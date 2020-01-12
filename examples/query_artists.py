@@ -8,9 +8,7 @@ if __name__ == "__main__":
         "mysql+pymysql://root:mypass@localhost/Chinook?charset=utf8mb4"
     )
 
-    Session.configure(bind=engine)
-
-    with session_scope() as session:
+    with session_scope(engine) as session:
         for artist in session.query(Artist).all():
             print(artist.name)
 

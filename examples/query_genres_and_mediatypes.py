@@ -4,9 +4,8 @@ from db import Session, get_engine, session_scope
 
 if __name__ == "__main__":
     engine = get_engine()
-    Session.configure(bind=engine)
 
-    with session_scope() as session:
+    with session_scope(engine) as session:
 
         print("All media types:")
         for media_type in session.query(MediaType):
