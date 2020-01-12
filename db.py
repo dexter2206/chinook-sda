@@ -15,7 +15,6 @@ def session_scope():
         session.rollback()
         raise
     finally:
-        print("Closing session")
         session.close()
 
 
