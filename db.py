@@ -1,4 +1,6 @@
 from contextlib import contextmanager
+
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 Session = sessionmaker()
@@ -15,3 +17,10 @@ def session_scope():
     finally:
         print("Closing session")
         session.close()
+
+
+def get_engine(echo=False):
+    return create_engine(
+        "mysql+pymysql://root:mypass@localhost/Chinook?charset=utf8mb4",
+        echo=echo
+    )
