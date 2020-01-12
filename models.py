@@ -26,3 +26,15 @@ class Album(Base):
 
     def __repr__(self):
         return f"<Album(id={self.id}, title={self.title})>"
+
+
+class MediaType(Base):
+    __tablename__="MediaType"
+    id = Column(Integer, primary_key=True, name="MediaTypeId")
+    name = Column(String(120), name="Name")
+
+
+class Genre(Base):
+    __tablename__ = "Genre"
+    id = Column(Integer, primary_key=True, name="GenreId")
+    name = Column(String(120), name="Name")
