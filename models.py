@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -59,3 +59,19 @@ class Track(Base):
 
     def __repr__(self):
         return f"<Track(name='{self.name}')>"
+
+
+playlists_tracks = Table(
+    "PlaylistTrack",
+    Base.metadata,
+    Column("PlaylistId", ForeignKey("Playlist.PlaylistId"), primary_key=True),
+    Column("TrackId", ForeignKey("Track.TrackId"), primary_key=True)
+)
+
+
+class Playlist(Base):
+    __tablename__ = "Playlist"
+    id = Column(Integer, primary_key=True, name="PlaylistId")
+    name = Column(String(120), name="Name")
+
+    tracks = relationship(Track, secondary=playlists_tracks)
